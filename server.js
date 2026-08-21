@@ -237,6 +237,24 @@ app.use((error, _request, response, _next) => {
   response.status(status).json({ success: false, error: status === 500 ? 'Internal server error' : error.message });
 });
 
+const selfPingUrl = process.env.RENDER_EXTERNAL_URL || process.env.APP_URL;
+const selfPingInterval = 10 * 60 * 1000;
+
+async function pingSelf() {
+  if (!selfPingUrl) return;
+
+  try {
+    const response = await fetch(new URL('/', selfPingUrl), {
+      signal: AbortSignal.timeout(10_000),
+    });
+    console.log(`Self-ping returned ${response.status}`);
+  } catch (error) {
+    console.error('Self-ping failed:', error.message);
+  }
+}
+
 app.listen(port, () => console.log(`Restaurant API listening on http://localhost:${port}`));
+
+if (selfPingUrl) setInterval(pingSelf, selfPingInterval);
 
 module.exports = app;
