@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard | Nu Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = { theme: { extend: { colors: {
+      sage:{50:'#f4f6f4',100:'#e5ebe5',200:'#cbd7cb',800:'#304230',900:'#283728',950:'#141d14'},
+      terracotta:{500:'#e06a4b',600:'#cc5233'},
+      cream:{50:'#fdfcf9',100:'#f8f5ee',200:'#f0e9d8'}
+    }}}}
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; background: #f4f6f4; }
+    .tab-btn { cursor:pointer; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; color:#476547; transition:all .2s; }
+    .tab-btn.active { background:#283728; color:#fff; }
+    .tab-pane { display:none; } .tab-pane.active { display:block; }
+    .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:50; align-items:center; justify-content:center; padding:12px; }
+    .modal-bg.open { display:flex; }
+    input,textarea,select { outline:none; }
+    input:focus,textarea:focus,select:focus { box-shadow: 0 0 0 2px rgba(224,106,75,0.18); }
+    .card { background:#fff; border-radius:18px; border:1px solid #e5ebe5; box-shadow:0 1px 4px rgba(40,55,40,.06); }
+    /* Login */
+    #loginScreen { display:flex; }
+    #appScreen { display:none; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+<!-- ===== LOGIN SCREEN ===== -->
+<div id="loginScreen" class="min-h-screen flex items-center justify-center px-4">
+  <div class="w-full max-w-sm">
+    <div class="text-center mb-8">
+      <div class="w-16 h-16 rounded-2xl mx-auto mb-3 flex items-center justify-center text-3xl font-black shadow-xl"
+           style="background:linear-gradient(135deg,#141d14,#283728);font-family:'Noto Sans Ethiopic',sans-serif">
+        <span style="background:linear-gradient(to top right,#f59e0b,#fef3c7,#f59e0b);background-clip:text;-webkit-background-clip:text;color:transparent;">ኑ</span>
+      </div>
+      <h1 class="text-2xl font-black text-sage-900">Admin Login</h1>
+      <p class="text-sm text-gray-400 mt-1">Nu Digital Menu Dashboard</p>
+    </div>
+    <div class="card p-7 space-y-4">
+      <div id="loginError" class="hidden bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-3 rounded-xl flex items-center gap-2">
+        <i class="fa-solid fa-triangle-exclamation"></i><span id="loginErrorText"></span>
+      </div>
+      <div class="space-y-1">
+        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider">Username</label>
+        <div class="relative">
+          <i class="fa-solid fa-user absolute left-3 top-3 text-gray-400 text-sm"></i>
+          <input id="loginUser" type="text" placeholder="admin"
+            class="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition">
+        </div>
+      </div>
+      <div class="space-y-1">
+        <label class="text-xs font-bold text-gray-500 uppercase tracking-wider">Password</label>
+        <div class="relative">
+          <i class="fa-solid fa-lock absolute left-3 top-3 text-gray-400 text-sm"></i>
+          <input id="loginPass" type="password" placeholder="••••••••"
+            class="w-full pl-10 pr-10 py-2.5 border border-gray-200 rounded-xl text-sm bg-gray-50 focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition"
+            onkeydown="if(event.key==='Enter')doLogin()">
+          <button type="button" onclick="togglePwd()" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+            <i id="pwdEye" class="fa-solid fa-eye text-sm"></i>
+          </button>
+        </div>
+      </div>
+      <button onclick="doLogin()"
+        class="w-full bg-gradient-to-r from-amber-500 to-terracotta-500 hover:from-amber-600 hover:to-terracotta-600 text-white font-extrabold py-3 rounded-xl transition active:scale-95 flex items-center justify-center gap-2 shadow-md">
+        <i class="fa-solid fa-right-to-bracket"></i> Sign In
+      </button>
+      <div class="text-center pt-1">
+        <a href="index.html" class="text-xs text-gray-400 hover:text-gray-600 flex items-center justify-center gap-1">
+          <i class="fa-solid fa-arrow-left text-xs"></i> Back to Menu
+        </a>
+      </div>
+    </div>
+    <p class="text-center text-[11px] text-gray-400 mt-5">
+      <i class="fa-solid fa-shield-check text-emerald-500 mr-1"></i>
+      Restricted admin access for approved emails only.
+    </p>
+  </div>
+</div>
+
+<!-- ===== APP SCREEN ===== -->
+<div id="appScreen" class="min-h-screen flex flex-col">
+
+  <!-- Top Bar -->
+  <header class="bg-sage-950 text-white px-4 sm:px-6 py-3 flex items-center justify-between sticky top-0 z-30 shadow-lg">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-xl shadow"
+           style="background:linear-gradient(135deg,#f59e0b,#e06a4b);font-family:'Noto Sans Ethiopic',sans-serif">ኑ</div>
+      <div>
+        <p class="font-black text-white text-sm leading-tight">Nu Menu — Admin</p>
+        <p class="text-[10px] text-amber-300" id="adminUserLabel"></p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="index.html" target="_blank" class="text-sage-300 hover:text-white text-xs font-bold flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sage-800 hover:bg-sage-700 transition">
+        <i class="fa-solid fa-eye"></i> <span class="hidden sm:inline">View Menu</span>
+      </a>
+      <button onclick="doLogout()" class="text-red-400 hover:text-red-200 text-xs font-bold flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-sage-800 hover:bg-sage-700 transition">
+        <i class="fa-solid fa-right-from-bracket"></i> <span class="hidden sm:inline">Logout</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Tab Nav -->
+  <div class="bg-white border-b border-sage-100 px-4 sm:px-6 flex items-center gap-1 overflow-x-auto">
+    <button class="tab-btn active" onclick="switchTab('menu')" id="tab-menu-btn"><i class="fa-solid fa-utensils mr-1.5"></i>Menu Items</button>
+    <button class="tab-btn" onclick="switchTab('categories')" id="tab-categories-btn"><i class="fa-solid fa-tags mr-1.5"></i>Categories</button>
+    <button class="tab-btn" onclick="switchTab('payment')" id="tab-payment-btn"><i class="fa-solid fa-wallet mr-1.5"></i>Payment</button>
+    <button class="tab-btn" onclick="switchTab('settings')" id="tab-settings-btn"><i class="fa-solid fa-gear mr-1.5"></i>Settings</button>
+  </div>
+
+  <main class="flex-1 p-4 sm:p-6 space-y-4 max-w-7xl mx-auto w-full">
+
+    <!-- Stats -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="statsRow"></div>
+
+    <!-- ===== MENU TAB ===== -->
+    <div id="tab-menu" class="tab-pane active space-y-4">
+      <div class="flex flex-wrap items-center gap-2">
+        <input type="text" id="searchItems" oninput="filterTable()" placeholder="Search items..."
+          class="flex-1 min-w-[140px] border border-sage-200 rounded-xl px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition">
+        <select id="filterCat" onchange="filterTable()"
+          class="border border-sage-200 rounded-xl px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-terracotta-500 transition">
+          <option value="">All Categories</option>
+        </select>
+        <select id="filterAvail" onchange="filterTable()"
+          class="border border-sage-200 rounded-xl px-3 py-2 text-sm bg-white focus:ring-2 focus:ring-terracotta-500 transition">
+          <option value="">All Status</option>
+          <option value="1">✅ Available</option>
+          <option value="0">❌ Hidden</option>
+        </select>
+        <button onclick="openAddModal()" class="bg-gradient-to-r from-amber-500 to-terracotta-500 text-white text-xs font-extrabold px-4 py-2 rounded-xl flex items-center gap-1.5 hover:from-amber-600 hover:to-terracotta-600 transition active:scale-95">
+          <i class="fa-solid fa-plus"></i> Add Item
+        </button>
+      </div>
+      <div class="card overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead class="bg-sage-50 border-b border-sage-100">
+              <tr>
+                <th class="text-left px-4 py-3 text-xs font-bold text-sage-700">Image</th>
+                <th class="text-left px-4 py-3 text-xs font-bold text-sage-700">Name</th>
+                <th class="text-left px-4 py-3 text-xs font-bold text-sage-700 hidden sm:table-cell">Category</th>
+                <th class="text-left px-4 py-3 text-xs font-bold text-sage-700">Price (ETB)</th>
+                <th class="text-left px-4 py-3 text-xs font-bold text-sage-700">Status</th>
+                <th class="text-right px-4 py-3 text-xs font-bold text-sage-700">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTbody" class="divide-y divide-sage-50"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== CATEGORIES TAB ===== -->
+    <div id="tab-categories" class="tab-pane">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" id="categoriesGrid"></div>
+    </div>
+
+    <!-- ===== PAYMENT TAB ===== -->
+    <div id="tab-payment" class="tab-pane">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="paymentGrid"></div>
+    </div>
+
+    <!-- ===== SETTINGS TAB ===== -->
+    <div id="tab-settings" class="tab-pane">
+      <div class="card p-6 max-w-md space-y-5">
+        <h3 class="font-black text-sage-900 text-base flex items-center gap-2"><i class="fa-solid fa-key text-amber-500"></i> Change Admin Password</h3>
+        <div class="space-y-3">
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-gray-500">Current Password</label>
+            <div class="relative"><input type="password" id="oldPass" class="w-full border border-gray-200 rounded-xl px-3 py-2 pr-10 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition"><button type="button" onclick="togglePassword('oldPass', this)" class="absolute right-3 top-2.5 text-gray-400" title="Show or hide password"><i class="fa-solid fa-eye"></i></button></div>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-gray-500">New Password</label>
+            <div class="relative"><input type="password" id="newPass" class="w-full border border-gray-200 rounded-xl px-3 py-2 pr-10 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition"><button type="button" onclick="togglePassword('newPass', this)" class="absolute right-3 top-2.5 text-gray-400" title="Show or hide password"><i class="fa-solid fa-eye"></i></button></div>
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs font-bold text-gray-500">Confirm New Password</label>
+            <div class="relative"><input type="password" id="confirmPass" class="w-full border border-gray-200 rounded-xl px-3 py-2 pr-10 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition"><button type="button" onclick="togglePassword('confirmPass', this)" class="absolute right-3 top-2.5 text-gray-400" title="Show or hide password"><i class="fa-solid fa-eye"></i></button></div>
+          </div>
+          <button onclick="changePassword()" class="w-full bg-sage-800 hover:bg-sage-900 text-white font-bold py-2.5 rounded-xl transition flex items-center justify-center gap-2">
+            <i class="fa-solid fa-floppy-disk"></i> Update Password
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- ===== ADD/EDIT MODAL ===== -->
+<div id="itemModal" class="modal-bg">
+  <div class="bg-white w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh]">
+    <div class="bg-gradient-to-r from-sage-950 to-sage-900 text-white px-6 py-4 flex items-center justify-between flex-shrink-0">
+      <h3 id="modalTitle" class="font-extrabold text-base">Add Menu Item</h3>
+      <button onclick="closeItemModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="overflow-y-auto flex-1 p-5 space-y-4">
+      <input type="hidden" id="editId">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-500">Name (Amharic) *</label>
+          <input id="fNameAm" type="text" placeholder="ክትፎ" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition" style="font-family:'Noto Sans Ethiopic',sans-serif">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-500">Name (English) *</label>
+          <input id="fNameEn" type="text" placeholder="Kitfo" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-500">Category *</label>
+          <select id="fCategory" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition"></select>
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-500">Price (ETB) *</label>
+          <input id="fPrice" type="number" step="0.01" min="0" placeholder="0.00" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition">
+        </div>
+        <div class="col-span-full space-y-1">
+          <label class="text-xs font-bold text-gray-500">Description (Amharic)</label>
+          <textarea id="fDescAm" rows="2" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition resize-none" style="font-family:'Noto Sans Ethiopic',sans-serif"></textarea>
+        </div>
+        <div class="col-span-full space-y-1">
+          <label class="text-xs font-bold text-gray-500">Description (English)</label>
+          <textarea id="fDescEn" rows="2" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition resize-none"></textarea>
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-500">Tag (Amharic)</label>
+          <input id="fTagAm" type="text" placeholder="ምርጥ" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs font-bold text-gray-500">Tag (English)</label>
+          <input id="fTagEn" type="text" placeholder="Popular" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition">
+        </div>
+        <div class="col-span-full space-y-2">
+          <label class="text-xs font-bold text-gray-500">Image Path or Upload</label>
+          <input id="fImg" type="text" placeholder="/menu-images/1-macchiato.jpg" class="w-full border border-gray-200 rounded-xl px-3 py-2 text-sm focus:ring-2 focus:ring-terracotta-500 focus:border-terracotta-500 transition font-mono" oninput="previewImg()">
+          <div class="flex items-center gap-2">
+            <input id="fImgFile" type="file" accept="image/*" class="block w-full text-xs text-gray-500 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-sage-800 file:text-white hover:file:bg-sage-900">
+            <button type="button" onclick="uploadSelectedImage('fImgFile','fImg')" class="bg-sage-800 hover:bg-sage-900 text-white text-[11px] font-bold px-3 py-2 rounded-xl transition">Upload</button>
+          </div>
+          <div id="imgPrev" class="mt-2 hidden"><img id="imgPrevEl" src="" alt="preview" class="h-20 rounded-xl object-cover border border-gray-100"></div>
+        </div>
+        <div class="space-y-1 flex items-center gap-3 pt-2">
+          <label class="text-xs font-bold text-gray-500">Available</label>
+          <input id="fAvail" type="checkbox" checked class="w-5 h-5 rounded cursor-pointer accent-emerald-500">
+        </div>
+      </div>
+    </div>
+    <div class="px-5 py-4 border-t border-gray-100 bg-gray-50 flex gap-3 justify-end flex-shrink-0">
+      <button onclick="closeItemModal()" class="px-4 py-2.5 text-xs font-bold text-gray-600 bg-white border border-gray-200 rounded-xl hover:bg-gray-50 transition">Cancel</button>
+      <button onclick="saveItem()" class="px-5 py-2.5 text-xs font-bold text-white bg-gradient-to-r from-amber-500 to-terracotta-500 rounded-xl hover:from-amber-600 hover:to-terracotta-600 transition active:scale-95 flex items-center gap-2">
+        <i class="fa-solid fa-floppy-disk"></i> Save Item
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== DELETE CONFIRM ===== -->
+<div id="deleteModal" class="modal-bg">
+  <div class="bg-white w-full max-w-xs rounded-3xl shadow-2xl mx-3 overflow-hidden">
+    <div class="p-6 text-center space-y-3">
+      <div class="w-14 h-14 rounded-full bg-red-100 flex items-center justify-center text-red-500 text-2xl mx-auto"><i class="fa-solid fa-trash"></i></div>
+      <h3 class="font-black text-gray-900">Delete this item?</h3>
+      <p class="text-xs text-gray-400">This cannot be undone.</p>
+    </div>
+    <div class="px-5 pb-5 flex gap-3">
+      <button onclick="document.getElementById('deleteModal').classList.remove('open')" class="flex-1 py-2.5 text-xs font-bold text-gray-600 bg-gray-100 rounded-xl hover:bg-gray-200 transition">Cancel</button>
+      <button onclick="confirmDelete()" class="flex-1 py-2.5 text-xs font-bold text-white bg-red-500 hover:bg-red-600 rounded-xl transition">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99;background:#141d14;color:#fff;font-size:12px;font-weight:700;padding:10px 18px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.3);border:1px solid rgba(245,158,11,0.3);display:none;align-items:center;gap:8px;">
+  <i id="toastIcon" class="fa-solid fa-circle-check" style="color:#34d399"></i>
+  <span id="toastMsg"></span>
+</div>
+
+<!-- Load all data files -->
+<script src="data/breakfast.js"></script>
+<script src="data/hot_drinks.js"></script>
+<script src="data/lunch_dinner.js"></script>
+<script src="data/snacks.js"></script>
+<script src="data/beer.js"></script>
+<script src="data/traditional.js"></script>
+<script src="data/soft_drinks.js"></script>
+<script src="admin-logic.js"></script>
+</body>
+</html>
+

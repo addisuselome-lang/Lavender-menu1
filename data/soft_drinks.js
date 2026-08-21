@@ -1,0 +1,10 @@
+// --- ለስላሳ መጠጦች / SOFT DRINKS & WATER ---
+const SOFT_DRINKS_ITEMS = [
+    { id: 71, category: "SOFT_DRINKS", catAm: "ለስላሳ መጠጦች", catEn: "Soft Drinks & Water", nameAm: "የታሸገ ውሃ (ትንሽ)",        nameEn: "Small Mineral Water (0.5L)",    price: 55.00,  tagAm: "",          tagEn: "",        descAm: "500ml የታሸገ የጠረጴዛ ውሃ",      descEn: "500ml bottled pure spring water",                  img: "/menu-images/1-water.jpg" },
+    { id: 72, category: "SOFT_DRINKS", catAm: "ለስላሳ መጠጦች", catEn: "Soft Drinks & Water", nameAm: "መካከለኛ ውሃ (1ሊትር)",       nameEn: "Medium Mineral Water (1L)",     price: 69.99,  tagAm: "",          tagEn: "",        descAm: "1 ሊትር የታሸገ ውሃ",            descEn: "1 Liter bottled natural mineral water",            img: "/menu-images/1-water.jpg" },
+    { id: 73, category: "SOFT_DRINKS", catAm: "ለስላሳ መጠጦች", catEn: "Soft Drinks & Water", nameAm: "ትልቅ ውሃ (2ሊትር)",         nameEn: "Large Mineral Water (2L)",      price: 90.00,  tagAm: "",          tagEn: "",        descAm: "2 ሊትር የታሸገ ውሃ",            descEn: "2 Liter large bottled drinking water",             img: "/menu-images/1-water.jpg" },
+    { id: 74, category: "SOFT_DRINKS", catAm: "ለስላሳ መጠጦች", catEn: "Soft Drinks & Water", nameAm: "ለስላሳ ",            nameEn: "Soft Drinks",                     price: 69.99,  tagAm: "",          tagEn: "",        descAm: "ቀዝቃዛ ለስላሳ መጠጦች",          descEn: "Chilled soft_drinks bottle",              img: "/menu-images/ሶዳ.jpg" },
+    { id: 75, category: "SOFT_DRINKS", catAm: "ለስላሳ መጠጦች", catEn: "Soft Drinks & Water", nameAm: "አምቦ ውሃ",          nameEn: "Ambo Water",           price: 70.00,  tagAm: "",          tagEn: "",        descAm: "ቀዝቃዛ አምቦ ውሃ",           descEn: "Refreshing Ambo water bottle",            img: "/menu-images/2-ambo-water.jpg" },
+    { id: 76, category: "SOFT_DRINKS", catAm: "ለስላሳ መጠጦች", catEn: "Soft Drinks & Water", nameAm: "ማልት መጠጦች (Malt)",         nameEn: "Malt Non-Alcoholic Drink",      price: 100.00, tagAm: "ኃይል ሰጪ",   tagEn: "Energy",  descAm: "ቀዝቃዛ ማልት መጠጥ",             descEn: "Non-alcoholic canned malt beverage",               img: "/menu-images/ማልት.jpg" },
+];
+
