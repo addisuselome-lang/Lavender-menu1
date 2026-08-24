@@ -141,10 +141,10 @@ const I18N = {
         account_number: 'የሂሳብ ቁጥር:',
         mobile_number: 'የሞባይል ቁጥር:',
         copy: 'ቅዳ',
-        created_by: 'የተፈጥሮ በ: solomie addisu',
-        contact: 'አድራሻ: +251 908 071 504',
+        created_by: 'Developer: solomie addisu',
+        contact: 'አድራሻ:',
         digital_menu: 'የምግብና መጠጥ ዝርዝር ዲጂታል ሜኑ',
-        digital_sub: 'ዲጂታል ሜኑ እና ዋጋ ማሳያ',
+        digital_sub: 'ኑ ለራሳችን ዋጋ እንስጥ!',
     },
     en: {
         search_ph: 'Search by name or category (e.g. Kitfo, Burger, Tea)...',
@@ -167,10 +167,10 @@ const I18N = {
         account_number: 'Account Number:',
         mobile_number: 'Mobile Number:',
         copy: 'Copy',
-        created_by: 'Created by: solomie addisu',
-        contact: 'Contact: +251 908 071 504',
+        created_by: 'Developer: solomie addisu',
+        contact: 'Contact:',
         digital_menu: 'Digital Food & Drink Menu',
-        digital_sub: 'Digital Menu & Price Showcase',
+        digital_sub: 'ኑ ለራሳችን ዋጋ እንስጥ!',
     }
 };
 
@@ -217,8 +217,8 @@ function applyI18n() {
     if (footerSubTitle) footerSubTitle.textContent = t('digital_sub');
     const footerBy = document.getElementById('footerBy');
     if (footerBy) footerBy.textContent = t('created_by');
-    const footerContact = document.getElementById('footerContact');
-    if (footerContact) footerContact.textContent = t('contact');
+    const footerContactLabel = document.getElementById('footerContactLabel');
+    if (footerContactLabel) footerContactLabel.textContent = t('contact');
 
     const paymentTitle = document.getElementById('paymentTitle');
     if (paymentTitle) paymentTitle.textContent = t('payment_info');
