@@ -590,6 +590,7 @@ async function renderPaymentAccounts() {
         const numberLabel = bankKey === 'TELEBIRR' ? t('mobile_number') : t('account_number');
         const holder = acc.account_holder || 'solomie Addisu';
         const number = acc.account_number || '';
+        const dialCode = bankKey === 'CBE' ? '*889#' : bankKey === 'TELEBIRR' ? '*127#' : (acc.dial_code || '');
         const icon = bankKey === 'TELEBIRR' ? 'fa-mobile-screen-button' : 'fa-building-columns';
 
         return `
@@ -619,7 +620,7 @@ async function renderPaymentAccounts() {
                             <button onclick="copyToClipboard('${number}', '${acc.bank_name} Number')" class="text-white text-xs font-bold px-3 py-2.5 rounded-xl transition flex items-center gap-1" style="background:${color};">
                                 <i class="fa-solid fa-copy"></i> ${t('copy')}
                             </button>
-                            <a href="tel:${number}" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2.5 rounded-xl transition flex items-center gap-1">
+                            <a href="tel:${encodeURIComponent(dialCode)}" class="bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-2.5 rounded-xl transition flex items-center gap-1">
                                 <i class="fa-solid fa-phone"></i> ${bankLabel}
                             </a>
                         </div>
