@@ -7,23 +7,25 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = { theme: { extend: { colors: {
-      sage:{50:'#f4f6f4',100:'#e5ebe5',200:'#cbd7cb',800:'#304230',900:'#283728',950:'#141d14'},
-      terracotta:{500:'#e06a4b',600:'#cc5233'},
+      sage:{50:'#FAF6F9',100:'#F3EBF5',200:'#E5D5E8',300:'#CFAFD7',400:'#B497BD',500:'#9B7DAA',600:'#7A5F88',700:'#6C5577',800:'#523E5C',900:'#3A2E40',950:'#261C2B'},
+      terracotta:{500:'#9B7DAA',600:'#7A5F88'},
+      amber:{300:'#CFAFD7',400:'#B497BD',500:'#9B7DAA',600:'#7A5F88'},
       cream:{50:'#fdfcf9',100:'#f8f5ee',200:'#f0e9d8'}
     }}}}
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;700;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Inter', sans-serif; background: #f4f6f4; }
-    .tab-btn { cursor:pointer; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; color:#476547; transition:all .2s; }
-    .tab-btn.active { background:#283728; color:#fff; }
+    body { font-family: 'Inter', sans-serif; background: #FAF6F9; }
+    .tab-btn { cursor:pointer; padding:8px 18px; border-radius:10px; font-weight:700; font-size:13px; color:#7A5F88; transition:all .2s; }
+    .tab-btn.active { background:#3A2E40; color:#fff; }
     .tab-pane { display:none; } .tab-pane.active { display:block; }
     .modal-bg { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:50; align-items:center; justify-content:center; padding:12px; }
     .modal-bg.open { display:flex; }
     input,textarea,select { outline:none; }
-    input:focus,textarea:focus,select:focus { box-shadow: 0 0 0 2px rgba(224,106,75,0.18); }
-    .card { background:#fff; border-radius:18px; border:1px solid #e5ebe5; box-shadow:0 1px 4px rgba(40,55,40,.06); }
+    input:focus,textarea:focus,select:focus { box-shadow: 0 0 0 2px rgba(180,151,189,0.28); }
+    .card { background:#fff; border-radius:18px; border:1px solid #E5D5E8; box-shadow:0 1px 4px rgba(82,62,92,.06); }
+    .brand-lovender-font { font-family:'Dancing Script', cursive; font-weight:700; }
     /* Login */
     #loginScreen { display:flex; }
     #appScreen { display:none; }
@@ -35,9 +37,9 @@
 <div id="loginScreen" class="min-h-screen flex items-center justify-center px-4">
   <div class="w-full max-w-sm">
     <div class="text-center mb-8">
-      <div class="w-16 h-16 rounded-2xl mx-auto mb-3 flex items-center justify-center text-3xl font-black shadow-xl"
-           style="background:linear-gradient(135deg,#141d14,#283728);font-family:'Noto Sans Ethiopic',sans-serif">
-        <span style="background:linear-gradient(to top right,#f59e0b,#fef3c7,#f59e0b);background-clip:text;-webkit-background-clip:text;color:transparent;">ኑ</span>
+      <div class="w-16 h-16 rounded-2xl mx-auto mb-3 flex items-center justify-center text-3xl text-sage-200 shadow-xl"
+           style="background:linear-gradient(135deg,#261C2B,#7A5F88)">
+        <i class="fa-solid fa-mug-saucer" aria-hidden="true"></i>
       </div>
       <h1 class="text-2xl font-black text-sage-900">Admin Login</h1>
       <p class="text-sm text-gray-400 mt-1">Nu Digital Menu Dashboard</p>
@@ -89,10 +91,12 @@
   <!-- Top Bar -->
   <header class="bg-sage-950 text-white px-4 sm:px-6 py-3 flex items-center justify-between sticky top-0 z-30 shadow-lg">
     <div class="flex items-center gap-3">
-      <div class="w-9 h-9 rounded-xl flex items-center justify-center font-black text-xl shadow"
-           style="background:linear-gradient(135deg,#f59e0b,#e06a4b);font-family:'Noto Sans Ethiopic',sans-serif">ኑ</div>
+      <div class="w-9 h-9 rounded-xl flex items-center justify-center text-lg text-sage-100 shadow"
+           style="background:linear-gradient(135deg,#7A5F88,#CFAFD7)">
+        <i class="fa-solid fa-mug-saucer" aria-hidden="true"></i>
+      </div>
       <div>
-        <p class="font-black text-white text-sm leading-tight">Nu Menu — Admin</p>
+        <p class="brand-lovender-font text-white text-xl leading-tight">Lovender <span class="font-sans text-sm font-black">— Admin</span></p>
         <p class="text-[10px] text-amber-300" id="adminUserLabel"></p>
       </div>
     </div>
@@ -276,7 +280,7 @@
 </div>
 
 <!-- Toast -->
-<div id="toast" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99;background:#141d14;color:#fff;font-size:12px;font-weight:700;padding:10px 18px;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.3);border:1px solid rgba(245,158,11,0.3);display:none;align-items:center;gap:8px;">
+<div id="toast" style="display:none;position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:99;background:#261C2B;color:#fff;font-size:12px;font-weight:700;padding:10px 18px;border-radius:16px;box-shadow:0 4px 20px rgba(82,62,92,0.3);border:1px solid rgba(180,151,189,0.3);display:none;align-items:center;gap:8px;">
   <i id="toastIcon" class="fa-solid fa-circle-check" style="color:#34d399"></i>
   <span id="toastMsg"></span>
 </div>

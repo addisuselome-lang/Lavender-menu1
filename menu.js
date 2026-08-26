@@ -123,15 +123,15 @@ const I18N = {
     am: {
         search_ph: 'በአማርኛ ይፈልጉ...',
         all_menu: 'ሁሉም ዝርዝር', price: 'ዋጋ',
-        tagline: 'ኑ ለራሳችን ዋጋ እንስጥ!!',
-        banner_title: 'የምግብና መጠጥ ዝርዝር',
-        banner_sub: 'ተወዳጅ የምግብና መጠጥ አማራጮችዎን ይፈልጉ',
+        tagline: 'chasing stress away with a splash of purple',
+        banner_title: 'ህይወት ይከሰታል፣ ቡና ይረዳል',
+        banner_sub: 'ለነፍስዎ ደስታ ጊዜ ይስጡ። ጣፋጭ ምግቦቻችንንና ልዩ የቡና መጠጦቻችንን ይመልከቱ',
         show_all: 'ሁሉንም አሳይ', no_results: 'ምንም ውጤት አልተገኘም',
         grid: 'ካርድ', list: 'ዝርዝር',
         unavail: 'አይገኝም',
         brand_title: 'የምግብና መጠጥ ዝርዝር',
         brand_badge: 'ዲጂታል',
-        brand_slogan: 'ኑ ለራሳችን ዋጋ እንስጥ!!',
+        brand_slogan: 'chasing stress away with a splash of purple',
         payment: 'ክፍያ',
         admin: 'አስተዳዳሪ',
         payment_info: 'የክፍያ መረጃ',
@@ -144,20 +144,20 @@ const I18N = {
         created_by: 'Developer: solomie addisu',
         contact: 'አድራሻ:',
         digital_menu: 'የምግብና መጠጥ ዝርዝር ዲጂታል ሜኑ',
-        digital_sub: 'ኑ ለራሳችን ዋጋ እንስጥ!',
+        digital_sub: 'chasing stress away with a splash of purple',
     },
     en: {
         search_ph: 'Search by name or category (e.g. Kitfo, Burger, Tea)...',
         all_menu: 'All Menu', price: 'Price',
-        tagline: 'Come, Let\'s Value Ourselves!!',
-        banner_title: 'Full Food & Drink Menu',
-        banner_sub: 'Search for your favorite food and drink items',
+        tagline: 'chasing stress away with a splash of purple',
+        banner_title: 'Life Happens, Coffee Helps',
+        banner_sub: 'Take time to make your soul happy. Explore our delicious food items, iced beverages, and specialty espresso drinks.',
         show_all: 'Show All', no_results: 'No results found',
         grid: 'Cards', list: 'List',
         unavail: 'Unavailable',
         brand_title: 'Food & Drink Menu',
         brand_badge: 'DIGITAL',
-        brand_slogan: 'Come, Let\'s Value Ourselves!!',
+        brand_slogan: 'chasing stress away with a splash of purple',
         payment: 'Payment',
         admin: 'Admin',
         payment_info: 'Payment Information',
@@ -170,7 +170,7 @@ const I18N = {
         created_by: 'Developer: solomie addisu',
         contact: 'Contact:',
         digital_menu: 'Digital Food & Drink Menu',
-        digital_sub: 'ኑ ለራሳችን ዋጋ እንስጥ!',
+        digital_sub: 'chasing stress away with a splash of purple',
     }
 };
 
@@ -267,6 +267,7 @@ window.onload = async function () {
     await loadMenuFromApi();
     renderCategoryNavPills();
     updateBanner(currentCategory);
+    updateHeroCardQuote(currentCategory);
     setViewMode('compact');
     renderMenuItems();
     const si = document.getElementById('searchInput');
@@ -315,7 +316,6 @@ function updateBanner(catKey) {
 
     if (tagEl) tagEl.textContent = t('tagline');
 
-    let heroSource = '/menu-images/ethiopia.jpg';
     if (catObj && catKey !== 'ALL') {
         const label = currentLang === 'en' ? catObj.en : catObj.am;
         if (filterEl) filterEl.textContent = label;
@@ -323,23 +323,49 @@ function updateBanner(catKey) {
 
         const sc = (API_CATEGORIES || CATEGORIES).find(c => c.key === catKey) || CATEGORIES.find(c => c.key === catKey);
         if (sc && subEl) subEl.textContent = currentLang === 'en' ? (sc.desc_en || sc.description_en || sc.en || sc.name_en) : (sc.desc_am || sc.description_am || sc.am || sc.name_am);
-        if (sc && (sc.hero_img)) heroSource = sc.hero_img;
     } else {
         if (filterEl) filterEl.textContent = t('all_menu');
         if (titleEl)  titleEl.textContent  = t('banner_title');
         if (subEl)    subEl.textContent    = t('banner_sub');
     }
 
-    if (heroImg) {
-        heroImg.src = heroSource;
-        heroImg.alt = catKey === 'ALL' ? 'Menu categories' : catKey;
-        heroImg.style.display = 'block';
-    }
-
     if (banner) {
-        banner.style.backgroundImage = `linear-gradient(135deg, rgba(15,23,42,0.82), rgba(39,52,42,0.72)), url('${heroSource}')`;
-        banner.style.backgroundSize = 'cover';
-        banner.style.backgroundPosition = 'center';
+        banner.style.backgroundImage = 'linear-gradient(135deg, #6C5577 0%, #9B7DAA 50%, #C4A7CF 100%)';
+        banner.style.backgroundColor = '#7A5F88';
+    }
+}
+
+function updateHeroCardQuote(categoryKey) {
+    const cardQuote = document.getElementById('heroCardQuote');
+    const cardIcon = document.getElementById('heroCardIcon');
+    const cardBadge = document.getElementById('heroCardBadge');
+    if (!cardQuote || !cardIcon || !cardBadge) return;
+
+    const key = String(categoryKey).toUpperCase();
+    if (key.includes('HOT') || key.includes('DRINK') || key.includes('TEA') || key.includes('COFFEE')) {
+        cardQuote.innerText = '"Life happens, coffee helps ♡"';
+        cardIcon.className = 'fa-solid fa-mug-hot text-xl text-lilac-200 mb-1';
+        cardBadge.innerText = 'Hot Specialty';
+    } else if (key.includes('BREAKFAST') || key.includes('MORNING')) {
+        cardQuote.innerText = '"Start your morning with a fresh bite"';
+        cardIcon.className = 'fa-solid fa-egg text-2xl text-lilac-200 mb-1.5';
+        cardBadge.innerText = 'Morning Delight';
+    } else if (key.includes('LUNCH') || key.includes('DINNER') || key.includes('FOOD')) {
+        cardQuote.innerText = '"Good food creates a good mood"';
+        cardIcon.className = 'fa-solid fa-utensils text-2xl text-lilac-200 mb-1.5';
+        cardBadge.innerText = 'Chef Special';
+    } else if (key.includes('SNACK') || key.includes('BURGER') || key.includes('FAST')) {
+        cardQuote.innerText = '"Take time to make your soul happy"';
+        cardIcon.className = 'fa-solid fa-cookie-bite text-2xl text-lilac-200 mb-1.5';
+        cardBadge.innerText = 'Crispy Choice';
+    } else if (key.includes('BEER') || key.includes('SOFT') || key.includes('COLD')) {
+        cardQuote.innerText = '"Chill out & refresh your spirit"';
+        cardIcon.className = 'fa-solid fa-glass-water text-2xl text-lilac-200 mb-1.5';
+        cardBadge.innerText = 'Cold Refreshment';
+    } else {
+        cardQuote.innerText = '"Coffee is always a good idea"';
+        cardIcon.className = 'fa-solid fa-mug-saucer text-2xl text-lilac-200 mb-1.5';
+        cardBadge.innerText = 'Lovender Specialty';
     }
 }
 
@@ -347,6 +373,7 @@ function selectCategory(catKey) {
     currentCategory = catKey;
     renderCategoryNavPills();
     updateBanner(catKey);
+    updateHeroCardQuote(catKey);
     renderMenuItems();
 }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Full Food & Drink Menu | Digital Menu Showcase</title>
+    <title>Lovender Café | Digital Menu</title>
 
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -12,31 +12,51 @@
             theme: {
                 extend: {
                     colors: {
-                        sage: {
-                            50: '#f4f6f4',
-                            100: '#e5ebe5',
-                            200: '#cbd7cb',
-                            300: '#a7bda7',
-                            400: '#7e9e7e',
-                            500: '#5c7f5c',
-                            600: '#476547',
-                            700: '#3a523a',
-                            800: '#304230',
-                            900: '#283728',
-                            950: '#141d14',
+                        lilac: {
+                            50: '#FAF6F9',
+                            100: '#F3EBF5',
+                            200: '#E5D5E8',
+                            300: '#CFAFD7',
+                            400: '#B497BD',
+                            500: '#9B7DAA',
+                            600: '#7A5F88',
+                            700: '#6C5577',
+                            800: '#523E5C',
+                            900: '#3A2E40',
+                            950: '#261C2B',
                         },
-                        cream: {
-                            50: '#fdfcf9',
-                            100: '#f8f5ee',
-                            200: '#f0e9d8',
-                            300: '#e4d8bc',
-                            400: '#d5c29a',
+                            sage: {
+                                50: '#FAF6F9', 
+                                100: '#F3EBF5', 
+                                200: '#E5D5E8', 
+                                300: '#CFAFD7',
+                                400: '#B497BD', 
+                                500: '#9B7DAA', 
+                                600: '#7A5F88', 
+                                700: '#6C5577',
+                                800: '#523E5C', 
+                                900: '#3A2E40', 
+                                950: '#261C2B',
+                            },
+                        latte: {
+                            50: '#FAF6F4',
+                            100: '#F5EFEB',
+                            200: '#EAE3D9',
+                            300: '#D9CCC0',
+                            400: '#C8B6A6',
                         },
+                            cream: {
+                                50: '#FAF6F4', 
+                                100: '#F5EFEB', 
+                                200: '#EAE3D9', 
+                                300: '#D9CCC0', 
+                                400: '#C8B6A6',
+                            },
                         terracotta: {
-                            400: '#f08a6e',
-                            500: '#e06a4b',
-                            600: '#cc5233',
-                            700: '#a83e25',
+                            400: '#CFAFD7',
+                            500: '#9B7DAA',
+                            600: '#7A5F88',
+                            700: '#6C5577',
                         },
                         telebirr: '#0054A6',
                         cbe: '#5C1D52'
@@ -53,36 +73,30 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
         <link rel="stylesheet" href="styles.css">
 </head>
-<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-terracotta-500 selection:text-white pb-20 sm:pb-0">
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sage-500 selection:text-white pb-20 sm:pb-0">
 
-    <header class="sticky top-0 z-40 bg-cream-100/95 backdrop-blur-md border-b border-sage-200 shadow-sm transition-all">
+    <header class="sticky top-0 z-40 bg-latte-100/95 backdrop-blur-md border-b border-lilac-200/60 shadow-sm transition-all">
+        <div class="bg-lilac-800 text-lilac-100 text-[11px] py-1.5 px-4 flex justify-between items-center border-b border-lilac-700">
+            <div class="max-w-7xl mx-auto w-full flex justify-between items-center">
+                <span><i class="fa-solid fa-mug-hot text-lilac-300 mr-2"></i>but first, coffee &hearts; &bull; Free Wi-Fi</span>
+                <span class="hidden sm:inline text-lilac-200 uppercase tracking-widest text-[10px]">Lovender Café &amp; Dining</span>
+            </div>
+        </div>
         <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-2.5 flex items-center justify-between gap-2">
             
             <!-- Brand Logo & Slogan -->
             <button onclick="selectCategory('ALL')" class="flex items-center gap-2.5 text-left group flex-shrink-0">
-                <div class="relative flex items-center justify-center">
-                    <div class="absolute -inset-1 bg-gradient-to-r from-amber-500 via-terracotta-500 to-amber-300 rounded-2xl blur-sm opacity-70 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
-                    <div class="relative w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-br from-sage-950 via-sage-900 to-sage-950 border border-amber-400/50 flex items-center justify-center text-amber-300 font-black text-2xl shadow-xl group-active:scale-95 transition-transform font-amharic ring-1 ring-white/20">
-                        <span class="bg-gradient-to-tr from-amber-400 via-amber-200 to-amber-500 bg-clip-text text-transparent drop-shadow-md">ኑ</span>
-                    </div>
-                </div>
+                <i class="fa-solid fa-mug-saucer text-2xl text-sage-600 group-hover:scale-110 transition"></i>
                 <div>
-                    <div class="flex items-center gap-1.5">
-                        <h1 id="brandMainTitle" class="text-base sm:text-xl font-black text-sage-900 tracking-tight leading-tight">
-                            የምግብና መጠጥ ዝርዝር
-                        </h1>
-                        <span id="brandBadge" class="bg-amber-100 text-amber-900 border border-amber-300 text-[9px] font-extrabold px-1.5 py-0.5 rounded-full uppercase tracking-wider">ዲጂታል</span>
-                    </div>
-                    <p id="brandSlogan" class="text-[10px] sm:text-xs text-terracotta-600 font-extrabold tracking-widest uppercase flex items-center gap-1">
-                        <i class="fa-solid fa-gem text-[9px] text-amber-500"></i> Come, Let's Value Ourselves!!
-                    </p>
+                    <h1 class="text-2xl sm:text-3xl brand-lovender-font italic leading-none">Lovender</h1>
+                    <span class="text-[9px] sm:text-[10px] text-sage-600 font-semibold tracking-[0.25em] uppercase block mt-0.5">Café &amp; Dining</span>
                 </div>
             </button>
 
@@ -102,48 +116,42 @@
             </div>
         </div>
 
-        <!-- Search Bar Section -->
-        <div class="bg-cream-50/80 px-3 sm:px-6 lg:px-8 py-2 border-t border-sage-200/60">
-            <div class="max-w-7xl mx-auto flex items-center gap-2">
-                <div class="relative flex-grow">
-                    <input type="text" id="searchInput" oninput="handleSearch()" 
-                           id="searchInput"
-                           placeholder="በአማርኛ ወይም በEnglish ይፈልጉ (e.g. ክትፎ, Burger, ሻይ)..." 
-                           class="w-full bg-white border border-sage-300 text-sage-900 placeholder-sage-400 text-xs sm:text-sm rounded-xl pl-9 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-terracotta-500 transition shadow-inner">
-                    <i class="fa-solid fa-magnifying-glass absolute left-3 top-2.5 text-sage-400 text-xs sm:text-sm"></i>
-                    <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-3 top-2 text-sage-400 hover:text-sage-700 text-xs">
-                        <i class="fa-solid fa-circle-xmark text-sm"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Category Navigation Bar -->
-        <div class="bg-sage-900 py-2 border-t border-sage-800">
-            <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex items-center gap-2 overflow-x-auto no-scrollbar" id="categoryNavPills">
-                <!-- Javascript will populate category nav pills here -->
-            </div>
-        </div>
     </header>
 
-    <main class="max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-6 flex-grow space-y-6">
+    <main class="max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow space-y-10">
 
         <!-- Category Banner Info -->
-        <section id="categoryBanner" class="bg-gradient-to-r from-sage-900 via-sage-800 to-sage-950 text-cream-50 rounded-2xl p-4 sm:p-6 shadow-md relative overflow-hidden">
-            <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div class="space-y-1">
-                    <div class="inline-flex items-center gap-2 bg-terracotta-500/20 text-terracotta-300 border border-terracotta-500/30 px-3 py-1 rounded-full text-[11px] font-bold">
-                        <i class="fa-solid fa-star text-xs"></i>
-                        <span id="bannerTagline">Come, Let's Value Ourselves!!</span>
+        <section id="categoryBanner" class="hero-section p-4 sm:p-10 text-white relative">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-6 items-center">
+                <div class="lg:col-span-8 space-y-2 sm:space-y-4">
+                    <span class="inline-block bg-white/20 text-white border border-white/30 px-2.5 sm:px-3.5 py-0.5 sm:py-1 rounded-full text-[9px] sm:text-[11px] font-semibold tracking-widest uppercase backdrop-blur-sm">
+                        <span id="bannerTagline">but first, coffee &hearts;</span>
+                    </span>
+                    <h2 id="bannerTitle" class="text-2xl sm:text-4xl font-serif font-bold text-white leading-tight">Life Happens, Coffee Helps</h2>
+                    <p id="bannerSubtitle" class="text-[11px] sm:text-sm text-lilac-100 max-w-xl font-light leading-snug sm:leading-relaxed">Take time to make your soul happy. Explore our delicious food items, iced beverages, and specialty espresso drinks.</p>
+                    <div class="pt-1 sm:pt-2 max-w-xl">
+                        <div class="relative flex items-center">
+                            <input type="text" id="searchInput" oninput="handleSearch()" placeholder="በአማርኛ ወይም በEnglish ይፈልጉ (e.g. Burger, Coffee)..." class="w-full text-[11px] sm:text-sm pl-10 sm:pl-12 pr-9 sm:pr-10 py-2.5 sm:py-3 rounded-full shadow-lg text-lilac-900 focus:outline-none">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3 sm:left-4 text-lilac-400 text-[11px] sm:text-xs"></i>
+                            <button id="clearSearchBtn" onclick="clearSearch()" class="hidden absolute right-4 text-lilac-400 hover:text-lilac-900 text-xs"><i class="fa-solid fa-circle-xmark text-sm"></i></button>
+                        </div>
                     </div>
-                    <h2 id="bannerTitle" class="text-xl sm:text-3xl font-extrabold text-cream-50 font-amharic leading-snug">
-                        Full Food &amp; Drink Menu
-                    </h2>
-                    <p id="bannerSubtitle" class="text-xs sm:text-sm text-sage-200 font-light max-w-xl">
-                        Search for your favorite food and drink items
-                    </p>
+                </div>
+                <div class="col-span-1 lg:col-span-4 block">
+                    <div class="bg-white/15 backdrop-blur-md border border-white/30 p-2.5 rounded-2xl shadow-xl">
+                        <div class="h-24 rounded-xl bg-lilac-900/40 overflow-hidden relative flex flex-col items-center justify-center border border-white/20 text-center p-2">
+                            <i id="heroCardIcon" class="fa-solid fa-mug-hot text-xl text-lilac-200 mb-1"></i>
+                            <p id="heroCardQuote" class="font-serif text-xs text-white italic px-2">& quot;Coffee is always a good idea & quot;</p>
+                            <span id="heroCardBadge" class="mt-1.5 bg-white/20 text-white text-[8px] px-2 py-0.5 rounded-full font-serif border border-white/30">Lovender Specialty</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+        </section>
+
+        <section class="space-y-4">
+            <h3 class="font-serif font-bold text-xl text-lilac-900 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-lilac-400"></span><span>የምግብ እና የመጠጥ ዓይነቶች (Categories)</span></h3>
+            <div class="flex items-center gap-2.5 overflow-x-auto no-scrollbar py-2" id="categoryNavPills"></div>
         </section>
 
         <!-- Search & Filter Status Header -->
@@ -156,7 +164,6 @@
                 </span>
             </div>
 
-            <!-- Display Mode Toggle Buttons -->
             <div class="flex items-center gap-1 bg-sage-200/60 p-1 rounded-xl">
                 <button onclick="setViewMode('grid')" id="viewBtnGrid" class="px-2.5 py-1 rounded-lg text-sage-600 hover:text-sage-900 text-xs flex items-center gap-1 transition">
                     <i class="fa-solid fa-border-all"></i>
@@ -195,16 +202,16 @@
         <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-amharic">
             <div class="flex items-center gap-3">
                 <div class="w-9 h-9 rounded-xl bg-terracotta-500 text-white flex items-center justify-center font-black text-base font-amharic shadow">
-                    ኑ
+                    <i class="fa-solid fa-spa" aria-hidden="true"></i>
                 </div>
                 <div>
                     <span id="footerMainTitle" class="block text-cream-100 font-bold">የምግብና የመጠጥ ዝርዝር ዲጂታል ሜኑ</span>
-                    <span id="footerSubTitle" class="text-[10px] text-sage-400">ኑ ለራሳችን ዋጋ እንስጥ!</span>
+                    <span id="footerSubTitle" class="text-[10px] text-sage-400">Chasing stress away with a splash of purple!</span>
                 </div>
             </div>
 
             <div class="text-center md:text-right">
-                <p id="footerBy" class="text-amber-400 font-bold">Developer: solomie addisu</p>
+                <p id="footerBy" class="text-amber-400 font-bold">  Developer: solomie addisu</p>
                 <div id="footerContact" class="text-[10px] text-sage-400 mt-1 flex flex-col items-center md:items-end gap-1">
                     <span id="footerContactLabel">Contact:</span>
                     <a href="tel:+251908071504" class="hover:text-amber-400 transition">+251 908 071 504</a>

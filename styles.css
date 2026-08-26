@@ -1,137 +1,120 @@
-﻿body {
-    font-family: 'Noto Sans Ethiopic', 'Inter', sans-serif;
-    background: linear-gradient(180deg, #f8f3ee 0%, #dfe5d8 100%);
-    color: #283728;
+﻿@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Noto+Sans+Ethiopic:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+    --bg-main: #FAF6F9;           /* Soft Pastel Cream Tint */
+    --bg-card: #FFFFFF;
+    --primary-dark: #523E5C;      /* Deep Soft Plum-Slate */
+    --primary-light: #B497BD;     /* Soft Pastel Lavender */
+    --accent-mauve: #D7B5D8;      /* Warm Muted Mauve */
+    --accent-cream: #F5EFEB;      /* Latte/Cream background */
+    --text-dark: #3A2E40;         /* Deep Soft Purple-Gray */
+    --text-muted: #8E7A99;        /* Muted Text */
+    --border-light: rgba(180, 151, 189, 0.25);
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', 'Noto Sans Ethiopic', sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-dark);
     -webkit-tap-highlight-color: transparent;
 }
 
+.font-serif-title {
+    font-family: 'Playfair Display', 'Noto Sans Ethiopic', serif;
+}
+
+.brand-lovender-font {
+    font-family: 'Dancing Script', 'Noto Sans Ethiopic', cursive !important;
+    font-weight: 700 !important;
+    font-style: normal !important;
+    letter-spacing: 0 !important;
+    background: linear-gradient(135deg, #523E5C 0%, #9B7DAA 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism Header */
 header {
-    background: rgba(248, 244, 237, 0.94);
-    border-bottom: 1px solid rgba(88, 109, 88, 0.18);
-    box-shadow: 0 8px 28px rgba(40, 55, 40, 0.06);
+    background: rgba(250, 246, 249, 0.95) !important;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-light) !important;
 }
 
-header .max-w-7xl {
-    padding-top: 0.85rem;
-    padding-bottom: 0.85rem;
-}
-
-#categoryNavPills {
-    gap: 0.6rem;
-    padding-top: 0.4rem;
-    padding-bottom: 0.4rem;
-}
-
-#categoryNavPills button {
-    border: 1px solid rgba(255,255,255,0.08);
-    letter-spacing: 0.01em;
-}
-
-#categoryBanner {
+/* Cozy Pastel Coffee Banner */
+.hero-section {
     position: relative;
-    min-height: 120px;
-    padding: 1.1rem 1.2rem 1.15rem;
-    border-radius: 1.5rem;
-    border: 1px solid rgba(255,255,255,0.12);
-    box-shadow: 0 18px 30px rgba(40, 55, 40, 0.12);
-    background: linear-gradient(135deg, rgba(20, 29, 20, 0.92), rgba(51, 65, 47, 0.86));
-    background-size: cover;
-    background-position: center;
+    background: linear-gradient(135deg, #6C5577 0%, #9B7DAA 50%, #C4A7CF 100%);
+    background-image: linear-gradient(135deg, #6C5577 0%, #9B7DAA 50%, #C4A7CF 100%) !important;
+    border-radius: 2rem;
     overflow: hidden;
-    isolation: isolate;
+    box-shadow: 0 20px 45px -10px rgba(108, 85, 119, 0.25);
 }
 
-#categoryBanner::before {
-    content: "";
-    position: absolute;
-    inset: auto -5% -25% 40%;
-    width: 74%;
-    height: 190%;
-    background: rgba(255,255,255,0.07);
-    border-radius: 44% 0 0 42%;
-    transform: rotate(-9deg);
-    z-index: 0;
+/* Navigation Tabs */
+.nav-tab-btn {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    border: 1px solid var(--border-light);
+    background-color: #FFFFFF;
+    color: var(--text-dark);
 }
 
-#categoryBanner::after {
-    content: "";
-    position: absolute;
-    inset: -18% auto auto -10%;
-    width: 40%;
-    height: 130%;
-    background: rgba(255,255,255,0.05);
-    border-radius: 48% 52% 46% 54% / 50% 44% 56% 50%;
-    transform: rotate(14deg);
-    z-index: 0;
+.nav-tab-btn:hover, .nav-tab-btn.active {
+    background-color: #9B7DAA !important;
+    color: #FFFFFF !important;
+    border-color: #9B7DAA !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(155, 125, 170, 0.25);
 }
 
-#categoryBanner > div {
-    position: relative;
-    z-index: 1;
-    gap: 0.75rem;
-}
-
-#categoryBanner h2 {
-    font-size: clamp(1.7rem, 3.2vw, 2.7rem);
-    line-height: 1.05;
-    letter-spacing: -0.05em;
-    max-width: 520px;
-    margin-top: 0.55rem;
-    margin-bottom: 0.2rem;
-    color: #fffaf3;
-    text-shadow: 0 10px 28px rgba(15, 22, 18, 0.24);
-}
-
-#categoryBanner p {
-    font-size: 0.83rem;
-    line-height: 1.55;
-    max-width: 620px;
-    color: rgba(255, 248, 240, 0.92);
-}
-
-#bannerTagline {
-    background: rgba(255,255,255,0.12) !important;
-    color: #fbe7c6 !important;
-    border: 1px solid rgba(255,255,255,0.16) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 18px rgba(0,0,0,0.08);
-    backdrop-filter: blur(10px);
-    font-size: 0.68rem;
-    letter-spacing: 0.02em;
-    padding: 0.42rem 0.7rem !important;
-}
-
-#bannerHeroImage {
-    display: none;
-}
-
+/* Search Input */
 #searchInput {
-    border-radius: 1rem;
-    min-height: 46px;
-    box-shadow: inset 0 1px 3px rgba(40, 55, 40, 0.05);
+    border-radius: 9999px;
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-light);
+    color: var(--text-dark);
+    transition: all 0.3s ease;
 }
 
-#activeFilterName {
-    font-size: 0.78rem;
-    letter-spacing: 0.02em;
+#searchInput:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 4px rgba(180, 151, 189, 0.25);
 }
 
+/* Food & Drink Cards Color Scheme */
 #itemsContainer .bg-white {
     border-radius: 1.5rem;
-    border: 1px solid rgba(94, 112, 92, 0.14);
-    box-shadow: 0 8px 18px rgba(34, 47, 35, 0.06);
+    border: 1px solid rgba(180, 151, 189, 0.22);
+    background: #FFFFFF;
+    box-shadow: 0 10px 30px rgba(82, 62, 92, 0.05);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-#itemsContainer img {
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
+.card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 35px rgba(82, 62, 92, 0.14) !important;
+    border-color: var(--primary-light) !important;
 }
 
-#emptyResults {
-    background: rgba(255, 255, 255, 0.55);
-    border-radius: 1.5rem;
-    border: 1px dashed rgba(88, 109, 88, 0.35);
+/* Item Image/Icon Placeholder background inside card */
+.item-card-image-wrapper {
+    background: linear-gradient(135deg, #F5EFEB 0%, #EAE3D9 100%);
 }
 
+/* Badge & Tag Styling */
+.item-tag {
+    background-color: #F3EBF5;
+    color: #6C5577;
+    border: 1px solid rgba(180, 151, 189, 0.3);
+}
+
+/* Price Highlight Tag */
+.price-tag {
+    color: #6C5577;
+    background-color: #F5EFEB;
+    border: 1px solid rgba(207, 175, 215, 0.4);
+}
+
+/* Hide Scrollbar */
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
@@ -140,106 +123,62 @@ header .max-w-7xl {
     scrollbar-width: none;
 }
 
-.card-hover {
-    transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.card-hover:active {
-    transform: scale(0.98);
-}
-@media (min-width: 640px) {
-    .card-hover:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px -5px rgba(40, 55, 40, 0.1);
-    }
+/* Animations */
+.modal-animate {
+    animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-.modal-animate {
-    animation: modalFadeIn 0.25s ease-out forwards;
-}
 @keyframes modalFadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; transform: scale(0.96) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
 }
 
 .toast-animate {
-    animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 @keyframes slideUp {
-    from { transform: translateY(100%); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+    from { transform: translate(-50%, 100%); opacity: 0; }
+    to { transform: translate(-50%, 0); opacity: 1; }
 }
 
 @media (max-width: 768px) {
-    #categoryBanner {
-        min-height: 150px;
-        padding: 0.85rem 0.9rem !important;
-    }
-
-    #categoryBanner > div {
-        gap: 0.75rem !important;
-    }
-
-    #categoryBanner h2 {
-        max-width: 220px;
-        font-size: clamp(1.5rem, 7vw, 2.1rem);
-        margin-top: 0.4rem;
-        margin-bottom: 0.3rem;
-    }
-
-    #categoryBanner p {
-        font-size: 0.72rem;
-        line-height: 1.5;
-    }
-
-    #bannerTagline {
-        font-size: 0.56rem !important;
-        padding: 0.28rem 0.5rem !important;
-    }
-
-    #bannerHeroImage {
-        width: 100%;
-        max-width: 220px;
-        height: 130px;
-        border-radius: 1rem;
+    .hero-section {
+        border-radius: 1.5rem;
     }
 }
 
-@media (max-width: 480px) {
-    #categoryBanner {
-        min-height: 132px;
-        padding: 0.75rem !important;
-    }
-
-    #categoryBanner > div {
-        align-items: center !important;
-    }
-
-    #bannerHeroImage {
-        max-width: 180px;
-        height: 116px;
-    }
-
-    #categoryBanner h2 {
-        max-width: 180px;
-        font-size: 1.35rem;
-    }
-
-    #categoryBanner p {
-        display: none;
-    }
+/* Keep the existing utility-based layout in the Lovender palette. */
+.text-amber-300,
+.text-amber-400,
+.text-amber-500,
+.text-amber-600,
+.text-terracotta-300,
+.text-terracotta-400,
+.text-terracotta-500,
+.text-terracotta-600 {
+    color: #7A5F88 !important;
 }
-@media (max-width: 640px) {
-    header .max-w-7xl {
-        padding-left: 0.8rem;
-        padding-right: 0.8rem;
-    }
 
-    #categoryBanner {
-        border-radius: 1.4rem;
-    }
+.bg-amber-100,
+.bg-amber-500,
+.bg-terracotta-500 {
+    background-color: #9B7DAA !important;
+}
 
-    #bannerHeroImage {
-        width: 100%;
-        height: 200px;
-    }
+.border-amber-300,
+.border-amber-400,
+.border-amber-500,
+.border-terracotta-500 {
+    border-color: #B497BD !important;
+}
+
+.from-amber-500,
+.from-terracotta-500 {
+    --tw-gradient-from: #7A5F88 var(--tw-gradient-from-position) !important;
+}
+
+.to-amber-300,
+.to-terracotta-500 {
+    --tw-gradient-to: #CFAFD7 var(--tw-gradient-to-position) !important;
 }
