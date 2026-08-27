@@ -258,3 +258,6 @@ app.listen(port, () => console.log(`Restaurant API listening on http://localhost
 if (selfPingUrl) setInterval(pingSelf, selfPingInterval);
 
 module.exports = app;
+app.get('/', (req, res) => {
+  res.send('Server is running successfully!');
+});
