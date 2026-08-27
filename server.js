@@ -261,3 +261,4 @@ module.exports = app;
 app.get('/', (req, res) => {
   res.send('Server is running successfully!');
 });
+app.use(express.static('public'));
