@@ -24,6 +24,9 @@ app.use(express.json({ limit: '1mb' }));
 app.use(express.static(__dirname));
 app.use('/uploads', express.static(uploadDirectory));
 app.use('/menu-images', express.static(path.join(__dirname, 'menu-images')));
+app.get('/', (_request, response) => {
+  response.sendFile(path.join(__dirname, 'index.html'));
+});
 app.get('/my-secret-dashboard', (_request, response) => {
   response.sendFile(path.join(__dirname, 'admin.html'));
 });
@@ -258,7 +261,3 @@ app.listen(port, () => console.log(`Restaurant API listening on http://localhost
 if (selfPingUrl) setInterval(pingSelf, selfPingInterval);
 
 module.exports = app;
-app.get('/', (req, res) => {
-  res.send('Server is running successfully!');
-});
-app.use(express.static('public'));
